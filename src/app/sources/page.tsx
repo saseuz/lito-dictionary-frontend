@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+export const metadata: Metadata = { title: "Our sources" };
+export default function Sources() {
+  return <article className="page-width empty-page"><p className="eyebrow">Words with roots</p><h1>Good words deserve credit.</h1><p className="mt-6 text-lg leading-relaxed">Lito brings dictionary meanings into a friendly place to explore. Each entry names its source and links to the original dictionary and its terms.</p><section className="entry-card mt-10"><Image src="/branding/merriam-webster.png" alt="Merriam-Webster" width={50} height={50} unoptimized /><h2 className="my-5 font-serif text-2xl">Merriam-Webster dictionaries</h2><p className="leading-relaxed">Our current English lookups are provided by Merriam-Webster. Available definitions, pronunciation text, and example sentences vary by entry. Dictionary content remains subject to the source’s terms.</p><div className="mt-6 flex flex-wrap gap-6"><a className="text-link" href="https://dictionaryapi.com/" rel="noreferrer">Visit the source</a><a className="text-link" href="https://dictionaryapi.com/info/terms-of-service" rel="noreferrer">Read the source terms</a></div></section></article>;
+}
