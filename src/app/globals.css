@@ -68,6 +68,60 @@ p, blockquote, h1, h2 { overflow-wrap: anywhere; }
 .site-footer { padding: 27px 0; color: #62705e; }
 .text-link { text-decoration: underline; text-underline-offset: 4px; }
 .text-link:hover { color: #1d6d44; }
+.account-nav { border: 1px solid #c5d6bd; border-radius: 24px; padding: 9px 15px; white-space: nowrap; color: var(--primary); background: #edf1e5; }
+.account-page { padding-block: 55px 80px; max-width: 1040px; }
+.account-heading { margin-bottom: 32px; max-width: 650px; }
+.account-heading h1 { font: 500 clamp(32px, 4vw, 48px)/1.15 Georgia, serif; letter-spacing: -.035em; margin-block: 18px; }
+.account-heading > p { color: #607166; line-height: 1.8; }
+.account-card { background: #fffef9; border: 1px solid #dce2d5; padding: 30px; border-radius: 22px; margin-bottom: 24px; min-width: 0; }
+.account-card h2 { font: 500 25px/1.3 Georgia, serif; margin-bottom: 18px; }
+.account-card > p { margin-block: 14px; line-height: 1.7; }
+.auth-card { max-width: 520px; }
+.auth-card > button { margin-block: 10px; }
+.account-form { display: grid; gap: 18px; }
+.account-form > button { justify-self: start; }
+.auth-card .account-form > button { justify-self: stretch; }
+.account-field { display: grid; gap: 8px; min-width: 0; }
+.account-field > label { font-size: 13px; font-weight: 700; }
+.account-field textarea { width: 100%; background: white; border: 1px solid #c8d5c8; padding: 12px; border-radius: 8px; resize: vertical; line-height: 1.6; }
+.account-field textarea:focus-visible { outline: 3px solid #d4b348; outline-offset: 3px; }
+.form-hint { font-size: 13px; line-height: 1.7; color: #607166; margin-top: 10px; }
+.check-label { display: flex; gap: 9px; align-items: center; font-size: 14px; }
+.check-label input { width: 17px; height: 17px; accent-color: var(--primary); }
+.form-error { background: #fff1eb; color: #812f28; border: 1px solid #edcbc1; border-radius: 10px; padding: 15px; font-size: 14px; line-height: 1.6; margin-block: 12px; }
+.form-error ul { list-style: disc; padding-left: 20px; margin-top: 8px; }
+.form-success, .verification-note { padding: 15px; border-radius: 10px; background: #edf2e3; font-size: 14px; line-height: 1.7; margin-block: 12px; }
+.form-divider { display: flex; align-items: center; gap: 15px; color: #607166; font-size: 13px; margin-block: 22px; }
+.form-divider::before, .form-divider::after { content: ""; flex: 1; height: 1px; background: #dce2d5; }
+.account-tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #dce2d5; padding-bottom: 18px; margin-bottom: 26px; }
+.account-tabs a { border-radius: 20px; padding: 9px 14px; font-size: 14px; }
+.account-tabs a[aria-current], .account-tabs a:hover { background: #e8eedf; color: #146044; }
+.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.settings-column { min-width: 0; }
+.confirm-box { width: 100%; padding: 16px; border: 1px solid #e4cca5; background: #fff6df; border-radius: 12px; font-size: 14px; }
+.confirm-box > p { margin-bottom: 14px; }
+.danger-card { border-color: #e4ccc1; }
+.bookmark-form { display: flex; gap: 14px; align-items: end; }
+.bookmark-form .account-field { flex: 1; }
+.bookmark-form button { height: 44px; }
+.private-list > li { padding-block: 22px; border-bottom: 1px solid #e3e7dc; }
+.private-list > li:last-child { border-bottom: 0; }
+.word-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+.word-row > div:first-child { min-width: 0; }
+.saved-word-title { font: 500 26px/1.3 Georgia, serif; overflow-wrap: anywhere; }
+a.saved-word-title:hover { text-decoration: underline; text-underline-offset: 4px; }
+.personal-example { white-space: pre-wrap; line-height: 1.8; font-family: Georgia, serif; font-size: 18px; border-left: 3px solid #d9be6b; padding-left: 18px; }
+.empty-collection { padding-block: 25px; max-width: 540px; }
+.empty-collection p { line-height: 1.8; margin-bottom: 20px; }
+.save-word { margin-block: 22px; font-size: 14px; }
+@media (max-width: 800px) { .settings-grid { grid-template-columns: 1fr; gap: 0; } }
+@media (max-width: 480px) {
+  .account-page { padding-top: 36px; }
+  .account-card { padding: 22px 18px; }
+  .site-header > div { flex-wrap: wrap; row-gap: 12px; }
+  .account-tabs a { padding-inline: 10px; font-size: 13px; }
+  .bookmark-form { align-items: stretch; flex-direction: column; }
+}
 .search-result, .feedback-card { border: 1px solid #dce2d5; background: #fffdf7; padding: 28px; border-radius: 20px; }
 .feedback-card { background: #faf0d3; }
 .source-credit { display: flex; align-items: flex-start; gap: 14px; font-size: 13px; overflow-wrap: anywhere; }

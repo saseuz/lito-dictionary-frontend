@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input";
 import { useLazyLookupQuery } from "../api/dictionary-api";
 import { wordPath } from "../api/lookup";
 import { SourceCredit } from "./source-credit";
+import { useMeQuery } from "@/features/account/api/session-api";
+import { useRecordSearchMutation } from "@/features/account/api/private-api";
+import { SaveWord } from "@/features/vocabulary/components/vocabulary";
 
 export function SearchForm({ initialWord = "", navigate = false }: { initialWord?: string; navigate?: boolean }) {
   const id = useId();
@@ -16,12 +19,16 @@ export function SearchForm({ initialWord = "", navigate = false }: { initialWord
   const [validation, setValidation] = useState("");
   const [pending, startTransition] = useTransition();
   const [lookup, result] = useLazyLookupQuery();
+  const me = useMeQuery();
+  const [recordSearch, history] = useRecordSearchMutation();
   const busy = pending || result.isFetching;
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = word.trim();
     if (!value) { setValidation("Enter a word to begin exploring."); return; }
     setValidation("");
+    // Only deliberate submissions in a known verified session. No anonymous replay.
+    if (me.data?.email_verified_at && !me.isFetching) void recordSearch({ word: value, client_event_id: crypto.randomUUID() });
     if (navigate) startTransition(() => router.push(wordPath(value)));
     else void lookup(value, false);
   }
@@ -44,6 +51,7 @@ export function SearchForm({ initialWord = "", navigate = false }: { initialWord
     </form>
     <div aria-live="polite" aria-atomic="true" aria-busy={busy}>
       {busy && <p role="status" className="mt-6 text-sm">Opening the dictionary…</p>}
+      {history.isError && <p role="status" className="mt-4 text-sm">Your search can continue, but we couldn’t save it to history.</p>}
       {!busy && error && <div className="feedback-card mt-6" role="alert"><p>{error}</p><p className="mt-2 text-sm">You can edit your search and try again.</p></div>}
       {!busy && result.currentData && <article className="search-result mt-6">
         <span className="eyebrow">A word worth discovering</span>
@@ -53,6 +61,7 @@ export function SearchForm({ initialWord = "", navigate = false }: { initialWord
         <Link prefetch={false} href={wordPath(result.originalArgs || result.currentData.word)} className="inline-flex items-center gap-2 font-semibold text-primary underline-offset-4 hover:underline">Explore this word <ArrowRight size={18} aria-hidden="true" /></Link>
         <div className="mt-6 border-t border-border pt-5"><SourceCredit source={result.currentData.source} /></div>
       </article>}
+      {!busy && result.originalArgs && <SaveWord key={result.originalArgs} word={result.originalArgs} />}
     </div>
   </div>;
 }
